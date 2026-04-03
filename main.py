@@ -17,7 +17,7 @@ import pandas as pd
 from analysis import compute_cl, solve_alpha
 
 BASE_DIR = Path(__file__).resolve().parent
-DATA_FILE = BASE_DIR / "data" / "test.csv"
+DATA_FILE = BASE_DIR / "data" / "test1.csv"
 
 def main():
     """Run the Wind Tunnel Analyzer workflow."""
@@ -27,7 +27,7 @@ def main():
 
     df = load_data(DATA_FILE)
     print_data_summary(df)
-    plot_lift_curve(df)
+    plot_lift_curve(df, cl0, lift_slope)
     plot_drag_curve(df)
 
     # TODO:
@@ -74,7 +74,7 @@ def print_data_summary(df):
     print()
 
 
-def plot_lift_curve(df, cl0=CL0, lift_slope=LIFT_SLOPE):
+def plot_lift_curve(df, cl0, lift_slope):
     """Plot experimental CL vs alpha data and overlay the linear lift model."""
     alpha_data = df["alpha_deg"]
     cl_data = df["cl"]
