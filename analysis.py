@@ -65,3 +65,12 @@ def print_lift_summary(alpha, cl0=0.10, lift_slope=0.11):
 #     solve_alpha(...)
 #
 # This feature has not been implemented yet.
+from scipy.optimize import fsolve
+
+def alpha_residual(alpha, targel_cl, cl0, lift_slope):
+    return cl0 + lift_slope * alpha - target_cl
+
+def solve_alpha(target_cl, cl0=0.10, lift_slope=0.11):
+    a_0 = 5.0
+    a_sol = fsolve(alpha_residual, a_0, args = (targel_cl,cl0, lift_slope))
+    return a_sol[0]
